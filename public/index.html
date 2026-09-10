@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ice-entity-designer · React 集成示例</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #f8fafc;
+        color: #0f172a;
+        font-family: system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      }
+      .app {
+        padding: 18px 22px 28px;
+      }
+      .header h1 {
+        margin: 0 0 4px;
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .header p {
+        margin: 0 0 14px;
+        font-size: 13px;
+        color: #64748b;
+      }
+      .header a {
+        color: #534ab7;
+        text-decoration: none;
+      }
+      .toolbar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+      }
+      .toolbar button {
+        padding: 6px 12px;
+        font-size: 13px;
+        color: #0f172a;
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .toolbar button:hover {
+        border-color: #94a3b8;
+      }
+      .toolbar button.primary {
+        color: #ffffff;
+        background: #534ab7;
+        border-color: #534ab7;
+      }
+      .toolbar .stats {
+        margin-left: 4px;
+        font-size: 13px;
+        color: #475569;
+      }
+      .body {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .canvas-box {
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        background: #f8fafc;
+        overflow: hidden;
+      }
+      .side {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 430px;
+      }
+      .card {
+        padding: 12px;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+      }
+      .card h3 {
+        margin: 0 0 8px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #334155;
+      }
+      .card pre {
+        margin: 0;
+        padding: 12px;
+        max-height: 340px;
+        overflow: auto;
+        font-size: 12px;
+        line-height: 1.5;
+        color: #e2e8f0;
+        background: #0f172a;
+        border-radius: 6px;
+      }
+      .card .empty {
+        font-size: 13px;
+        color: #94a3b8;
+      }
+      .card .stats {
+        font-size: 13px;
+        color: #334155;
+      }
+      .card .stats strong {
+        font-weight: 600;
+        color: #0f172a;
+      }
+      code {
+        padding: 1px 4px;
+        font-size: 12px;
+        background: #eef2f7;
+        border-radius: 4px;
+      }
+      .card ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+      .card ul li {
+        font-size: 13px;
+        color: #b91c1c;
+      }
+      .card .ok {
+        font-size: 13px;
+        color: #047857;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
