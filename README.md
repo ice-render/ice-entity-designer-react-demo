@@ -89,19 +89,21 @@ const [project, setProject] = useState(initialJson);
 
 ## 依赖说明
 
-`package.json` 里两个包用 `file:` 指向同级仓库：
+只需依赖 `ice-entity-designer` 一个包——它的**引擎内核（ice-render）已在构建时打包进去**，无需单独安装：
 
 ```json
 "ice-entity-designer": "file:../ice-entity-designer",
-"ice-render": "file:../ice-render"
+"react": "^18.2.0",
+"react-dom": "^18.2.0"
 ```
 
-因为 React 绑定（`ice-entity-designer/react`）与引擎的 `ICE.destroy()` 目前在本地仓库的 `master` 上，尚未发布到 npm。
+因为 React 绑定（`ice-entity-designer/react`）目前在本地仓库的 `master` 上，尚未发布到 npm，所以用 `file:` 指向同级仓库。
 等新版本发布后，换成版本号即可：
 
 ```json
 "ice-entity-designer": "^0.0.17",
-"ice-render": "^1.0.5"
+"react": "^18.2.0",
+"react-dom": "^18.2.0"
 ```
 
 ## 备注
