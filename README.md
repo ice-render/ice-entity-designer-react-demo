@@ -15,9 +15,17 @@
 ## 运行
 
 ```bash
-npm install
+npm install --ignore-scripts
 npm run start    # http://localhost:8080
 ```
+
+> **为什么要加 `--ignore-scripts`**：本工程用 `file:` 链接同级仓库，npm 在链接阶段会遍历
+> **被链接包的依赖树**并执行它们的 `prepare` 脚本。`ice-entity-designer` 锁定的
+> `typescript@4.6.2` 在已发布的包里带着 `prepare: gulp build-eslint-rules`（那是 TypeScript
+> 仓库自己的开发脚本），`gulp` 不存在 → 安装以 `code 127` 失败。这是**既有问题**，
+> 与引擎/绑定层的改动无关（已用 A/B 验证：去掉本工程的 `prepare` 后同样失败）。
+> 该脚本对本工程无意义，跳过即可；TypeScript 5.6+ 的包已不再带这个 `prepare`，
+> 把两个仓库的 `typescript` 升上去也能根治。
 
 生产构建：
 
@@ -97,7 +105,7 @@ const [project, setProject] = useState(initialJson);
 "react-dom": "^18.2.0"
 ```
 
-因为 React 绑定（`ice-entity-designer/react`）目前在本地仓库的 `master` 上，尚未发布到 npm，所以用 `file:` 指向同级仓库。
+因为 React 绑定（`ice-entity-designer/react`）目前还只在本仓库的 `dev` 上（`master` 由 `dev` 快进跟随），尚未发布到 npm，所以用 `file:` 指向同级仓库。
 等新版本发布后，换成版本号即可：
 
 ```json
@@ -105,6 +113,17 @@ const [project, setProject] = useState(initialJson);
 "react": "^18.2.0",
 "react-dom": "^18.2.0"
 ```
+
+## 已知约束
+
+- **本工程是生产构建（webpack + terser），类名会被压缩**。这正是它能发现「按类名判类型」隐藏缺陷的原因：
+  `constructor.name === 'Entity'` 在压缩后变成 `'Dr' === 'Entity'`，判断**静默失效**且页面不报错。
+  库侧因此统一改用稳定标识 `Entity.typeId` / `Relation.typeId`（见 `src/utils/component_type_util.ts`），
+  并由 `tests/designer/type-mangling.test.ts` 显式模拟改名锁住契约。
+- **类型检查要求两侧的 `@types/react` 版本一致**。本工程用 `file:` 链接时，仓库自身与其 `node_modules` 里的
+  `@types/react` 会各被解析一次；两者版本不同（例如 18.2.0 vs 18.3.31）会报
+  `TS2786: 'EntityDesignerCanvas' cannot be used as a JSX component`。
+  两侧都新增 `@types/react` 到同一版本即可（当前均为 18.3.x）。
 
 ## 备注
 
