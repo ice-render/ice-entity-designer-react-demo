@@ -2,3 +2,8 @@ node_modules/
 dist/
 npm-debug.log*
 .DS_Store
+
+# 不锁 package-lock.json：本工程用 file: 链接同级仓库，npm 会把 react / react-dom / typescript
+# 解析成指向「兄弟仓库 node_modules」的 link 条目，离开兄弟仓库的安装状态就无法复现，
+# 锁一份这样的清单反而误导。装法见 README（npm install --ignore-scripts）。
+package-lock.json
