@@ -107,6 +107,25 @@ export default function FlowSidePanel({ version, jsonText }: FlowSidePanelProps)
               />
             </div>
             <div style={rowStyle}>
+              <span style={labelStyle}>文字颜色</span>
+              <input
+                type="color"
+                data-field="textColor"
+                value={selected.state.textColor}
+                onChange={(event) => commit({ textColor: event.target.value })}
+              />
+              <span style={{ ...labelStyle, width: 32, marginLeft: 8 }}>字号</span>
+              <input
+                style={inputStyle}
+                type="number"
+                data-field="fontSize"
+                min={8}
+                defaultValue={selected.state.fontSize}
+                key={`fs-${selected.state.id}-${selected.state.fontSize}`}
+                onBlur={(event) => commit({ fontSize: Number(event.target.value) || selected.state.fontSize })}
+              />
+            </div>
+            <div style={rowStyle}>
               <span style={labelStyle}>尺寸</span>
               <input
                 style={inputStyle}
@@ -152,6 +171,35 @@ export default function FlowSidePanel({ version, jsonText }: FlowSidePanelProps)
                 <option value="visio">Visio 折线</option>
                 <option value="bezier">贝塞尔曲线</option>
               </select>
+            </div>
+            <div style={rowStyle}>
+              <span style={labelStyle}>连线颜色</span>
+              <input
+                type="color"
+                data-field="lineColor"
+                value={selected.state.style?.strokeStyle || '#475569'}
+                onChange={(event) => commit({ style: { strokeStyle: event.target.value, fillStyle: event.target.value } })}
+              />
+              <span style={{ ...labelStyle, width: 32, marginLeft: 8 }}>粗细</span>
+              <input
+                style={inputStyle}
+                type="number"
+                data-field="lineWidth"
+                min={0.5}
+                step={0.5}
+                defaultValue={selected.state.style?.lineWidth ?? 1.6}
+                key={`lw-${selected.state.id}-${selected.state.style?.lineWidth}`}
+                onBlur={(event) => commit({ style: { lineWidth: Number(event.target.value) || 1.6 } })}
+              />
+            </div>
+            <div style={rowStyle}>
+              <span style={labelStyle}>标签颜色</span>
+              <input
+                type="color"
+                data-field="labelColor"
+                value={selected.state.labelStyle?.fillStyle || '#334155'}
+                onChange={(event) => commit({ labelStyle: { fillStyle: event.target.value } })}
+              />
             </div>
           </div>
         )}
