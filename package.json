@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "description": "ice-entity-designer 的 React 集成示例工程（webpack + TypeScript）",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ice-render/ice-entity-designer-react-demo.git"
+  },
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
