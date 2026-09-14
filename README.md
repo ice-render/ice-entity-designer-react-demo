@@ -120,6 +120,9 @@ const [project, setProject] = useState(initialJson);
   `constructor.name === 'Entity'` 在压缩后变成 `'Dr' === 'Entity'`，判断**静默失效**且页面不报错。
   库侧因此统一改用稳定标识 `Entity.typeId` / `Relation.typeId`（见 `src/utils/component_type_util.ts`），
   并由 `tests/designer/type-mangling.test.ts` 显式模拟改名锁住契约。
+  这些 `typeId` 自 2026-09-13 起是 **`namespace:Type` 格式**（`ice-entity-designer:Entity`、
+  `ice-entity-designer:FlowNode`…），因此本工程判型也统一写成 `selected.constructor.typeId === FlowNode.typeId`，
+  **不要**再写 `=== 'FlowNode'` 这类字面量（升级后会静默失效）。
 - **类型检查要求两侧的 `@types/react` 版本一致**。本工程用 `file:` 链接时，仓库自身与其 `node_modules` 里的
   `@types/react` 会各被解析一次；两者版本不同（例如 18.2.0 vs 18.3.31）会报
   `TS2786: 'EntityDesignerCanvas' cannot be used as a JSX component`。

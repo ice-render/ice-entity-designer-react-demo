@@ -1,5 +1,5 @@
 import { useFlowDesigner } from 'ice-entity-designer/react';
-import { FLOW_NODE_KINDS } from 'ice-entity-designer/react';
+import { FLOW_NODE_KINDS, FlowNode } from 'ice-entity-designer/react';
 
 export type FlowSidePanelProps = {
   /** 每次模型变更由 App 递增；作为依赖驱动重新读取选中项与统计 */
@@ -26,7 +26,9 @@ export default function FlowSidePanel({ version, jsonText }: FlowSidePanelProps)
     if (!flow || !selected) {
       return;
     }
-    if (selected.constructor.typeId === 'FlowNode') {
+    // 用 FlowNode.typeId（canonical `ice-entity-designer:FlowNode`）判型，不要写字面量：
+    // 类名与 typeId 都可能随版本变化，写字面量会在升级后静默失效
+    if (selected.constructor.typeId === FlowNode.typeId) {
       flow.updateNode(selected.state.id, patch);
     } else {
       flow.updateEdge(selected.state.id, patch);
@@ -51,7 +53,7 @@ export default function FlowSidePanel({ version, jsonText }: FlowSidePanelProps)
         <h3>选中项属性</h3>
         {!flow || !selected ? (
           <div className="empty">点击画布中的节点或连线进行编辑（拖动节点时这里与 JSON 会实时同步）</div>
-        ) : selected.constructor.typeId === 'FlowNode' ? (
+        ) : selected.constructor.typeId === FlowNode.typeId ? (
           <div data-selected-kind="node">
             <div style={rowStyle}>
               <span style={labelStyle}>标题</span>
