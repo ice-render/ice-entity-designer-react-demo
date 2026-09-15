@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "ice-entity-designer": "file:../ice-entity-designer",
-    "ice-render": "^2.11.2",
+    "ice-render": "^2.12.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
