@@ -31,7 +31,7 @@
 **手工验收**（改动绑定层后跑一遍，工作目录本仓）：
 
 1. `npm install --ignore-scripts`（为什么必须加见「已知的坑」第 1 条）
-2. `npm run build` → 起静态服务（如 `http-server -p 8092 -c-1 dist`）
+2. `npm run build` → 起静态服务（用本仓端口 8095：`http-server -p 8095 -c-1 dist`；webpack dev 仍用 8080）
 3. 用 Playwright 打开页面断言：初始 **`实体 6 个 · 关系 4 条`**（`src/seed.ts` 种子模型）、
    新增实体 +1、连接 +1 关系、撤销/重做来回、导出 Schema 可解析、重置回 6/4，
    且 **console / page error 均为 0**。
